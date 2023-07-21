@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo yum update -y
 
-sudo yum install -y httpd24 php72 mysql57-server php72-mysqlnd
+sudo yum install -y httpd php mysql php-mysqlnd
 sudo service httpd start
 sudo chkconfig httpd on
 
@@ -12,3 +12,7 @@ find /var/www -type d -exec sudo chmod 2775 {} \;
 find /var/www -type f -exec sudo chmod 0664 {} \;
 #test page
 echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
+
+#configure TLS/SSL
+sudo yum install -y mod_ssl
+sudo service httpd restart
